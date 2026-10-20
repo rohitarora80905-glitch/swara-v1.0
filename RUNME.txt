@@ -1,0 +1,60 @@
+================================================================
+ SWARA — HOW TO RUN IT ON YOUR LAPTOP
+================================================================
+
+STEP 1 — install the requirements
+   pip install -r requirements.txt
+
+STEP 1b — the web console (recommended)
+   python -m uvicorn api_server:app --port 8000
+   then open http://localhost:8000   (Windows: double-click start_console.bat)
+   or double-click "SWARA Server.bat" for a window with Start / Stop buttons
+
+STEP 1c — a live call between two laptops, all in the browser
+   Host:   double-click "SWARA Server.bat", open the console, go to Softphone,
+           sign in as alice / secret1.
+   Friend: on the same Wi-Fi, open the host's https://<host-ip>:8443/ link (shown in
+           the host's window), accept the certificate warning, go to Softphone and
+           sign in as bob / secret2.  A phone works too.
+           (Or run the same console on the friend's laptop, and in Softphone set the
+           relay address to <host-ip>:9000 for real laptop-to-laptop UDP.)
+   Either side clicks Call next to the other's name.  Use earphones.
+
+STEP 2 — run the demo (no second laptop, no microphone needed)
+   python3 demo.py --seconds 20
+
+   Expect: 0% loss, correlation 0.999, 0 auth failures.
+   This is the demo to show in class. It is the most reliable.
+
+STEP 3 — show it surviving a bad network
+   python3 demo.py --seconds 20 --loss 0.15 --burst 2 --compare
+
+   Runs the same call three times: SWARA, uniform FEC, unprotected.
+
+STEP 4 (optional) — a real call between two terminals
+   python3 server.py --add-user alice --password secret1
+   python3 server.py --add-user bob   --password secret2
+   python3 server.py --port 9000                                  <- terminal 1
+   python3 client.py --user bob   --password secret2 --wait        <- terminal 2
+   python3 client.py --user alice --password secret1 --call bob    <- terminal 3
+
+STEP 5 (optional) — real microphone and speakers
+   pip install sounddevice
+   then add:  --audio live   to both client commands
+
+STEP 6 — regenerate all 8 research figures
+   python3 experiments/run_all.py          (about 3 minutes)
+
+----------------------------------------------------------------
+IF SOMETHING GOES WRONG
+----------------------------------------------------------------
+"ModuleNotFoundError"      -> run STEP 1
+"Address already in use"   -> change --port 9000 to another number
+Client can't reach server  -> many campus Wi-Fi networks block
+                              device-to-device UDP. Use STEP 2/3
+                              instead, which needs no network.
+No sound with --audio live -> check OS microphone permissions;
+                              fall back to --audio synthetic
+
+TEST ON THE PRESENTATION MACHINE BEFORE THE DAY, NOT THE NIGHT BEFORE.
+Record a screen capture of a successful run as a backup.

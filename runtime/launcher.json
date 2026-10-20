@@ -1,0 +1,9 @@
+{
+  "web_port": 8001,
+  "relay_port": 9000,
+  "https_port": 8443,
+  "https_on": true,
+  "relay_auto": true,
+  "open_browser": true,
+  "autostart": true
+}

@@ -1,0 +1,11 @@
+numpy>=1.24
+matplotlib>=3.6
+cryptography>=41
+
+# Web console and REST API (api_server.py); websockets carries the softphone audio.
+fastapi>=0.110
+uvicorn>=0.29
+websockets>=12
+
+# Optional: real microphone and speaker support.
+sounddevice>=0.4

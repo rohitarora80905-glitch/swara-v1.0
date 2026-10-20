@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SWARA Console</title>
+  <meta name="description" content="Operations console for SWARA — Secure Wideband Adaptive Real-time Audio over UDP">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2314b8a6'/%3E%3Cpath d='M6 16h3l2-6 4 13 3-10 2 5h6' fill='none' stroke='%23042f2e' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#042f2e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-6 4 13 3-10 2 5h6"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">SWARA</div>
+        <div class="brand-sub">Secure Wideband Adaptive<br>Real-time Audio over UDP</div>
+      </div>
+    </div>
+    <nav class="nav" id="nav">
+      <div class="nav-group">
+        <div class="nav-label">Console</div>
+        <a href="#/overview" data-page="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Overview</a>
+        <a href="#/phone" data-page="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M11 18h2"/></svg>Softphone<span class="pill" style="background:var(--accent-2)">CALL</span></a>
+        <a href="#/lab" data-page="lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Live Call Lab<span class="pill hidden" id="nav-live">LIVE</span></a>
+        <a href="#/bench" data-page="bench"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>A/B Benchmark</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">Analysis</div>
+        <a href="#/sim" data-page="sim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg>Network Simulator</a>
+        <a href="#/research" data-page="research"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3"/><path d="M7 15h10"/></svg>Research Results</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">Protocol Toolkit</div>
+        <a href="#/perceptual" data-page="perceptual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></svg>Perceptual Analyzer</a>
+        <a href="#/fec" data-page="fec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="4" height="10" rx="1"/><rect x="8" y="7" width="4" height="10" rx="1"/><rect x="14" y="7" width="4" height="10" rx="1"/><path d="M20 7v10M22 9l-2-2-2 2"/></svg>FEC Playground</a>
+        <a href="#/quality" data-page="quality"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/></svg>Quality &amp; NAVIK</a>
+        <a href="#/handshake" data-page="handshake"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>SPARK Handshake</a>
+        <a href="#/packet" data-page="packet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Packet Anatomy</a>
+        <a href="#/overlay" data-page="overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></svg>SETU Overlay</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">Operations</div>
+        <a href="#/relay" data-page="relay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 6.5h.01M6 17.5h.01"/></svg>Relay &amp; Users</a>
+        <a href="#/system" data-page="system"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>System &amp; API</a>
+      </div>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="row"><span class="chip" style="height:24px;font-size:11px" id="foot-relay"><span class="dot"></span>Relay</span><span class="chip" style="height:24px;font-size:11px" id="foot-engine"><span class="dot ok"></span>Engine</span></div>
+      <div class="row"><a href="/docs" target="_blank">Swagger</a><span class="dim">·</span><a href="/redoc" target="_blank">ReDoc</a><span class="dim">·</span><span class="dim" id="foot-uptime"></span></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="btn ghost sm menu-btn" id="menu-btn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="page-title"><div class="crumb" id="crumb">Console</div><h1 id="title">Overview</h1></div>
+      <div class="spacer"></div>
+      <div class="status-chips">
+        <span class="chip" id="chip-relay" title="Hosted UDP relay"><span class="dot"></span><span>Relay</span></span>
+        <span class="chip opt" id="chip-engine" title="Live call engine"><span class="dot ok"></span><span>Engine idle</span></span>
+        <a class="btn sm" href="/docs" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7M10 14L21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>API Docs</a>
+      </div>
+    </header>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+<div class="toasts" id="toasts"></div>
+
+<script src="/static/vendor/chart.umd.min.js"></script>
+<script src="/static/js/core.js"></script>
+<script src="/static/js/pages/overview.js"></script>
+<script src="/static/js/pages/phone.js"></script>
+<script src="/static/js/pages/lab.js"></script>
+<script src="/static/js/pages/bench.js"></script>
+<script src="/static/js/pages/sim.js"></script>
+<script src="/static/js/pages/research.js"></script>
+<script src="/static/js/pages/perceptual.js"></script>
+<script src="/static/js/pages/fec.js"></script>
+<script src="/static/js/pages/quality.js"></script>
+<script src="/static/js/pages/handshake.js"></script>
+<script src="/static/js/pages/packet.js"></script>
+<script src="/static/js/pages/overlay.js"></script>
+<script src="/static/js/pages/relay.js"></script>
+<script src="/static/js/pages/system.js"></script>
+<script>SW.boot();</script>
+</body>
+</html>
